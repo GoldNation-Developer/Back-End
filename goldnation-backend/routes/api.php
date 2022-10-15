@@ -24,6 +24,11 @@ Route::get('categories', [ProductCategoryController::class, 'all']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
+//password reset routes
+Route::post('password/email',  ForgotPasswordController::class);
+Route::post('password/code/check', CodeCheckController::class);
+Route::post('password/reset', ResetPasswordController::class);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
     Route::post('user', [UserController::class, 'updateProfile']);
@@ -32,3 +37,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('transaction', [TransactionController::class, 'all']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
 });
+
