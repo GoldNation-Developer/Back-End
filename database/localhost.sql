@@ -48,7 +48,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1,	'2014_10_12_000000_create_users_table',	1),
@@ -115,8 +115,12 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1,	'App\\Models\\User',	1,	'authToken',	'effa4dcfa4255e507e89f3b65019571088169e54f67cac21aa3224a99d347278',	'[\"*\"]',	NULL,	NULL,	'2022-10-14 16:47:53',	'2022-10-14 16:47:53'),
+(2,	'App\\Models\\User',	1,	'authToken',	'f84092cd73b5048d291406cf6b1ced08f631596a2f4e2a737efce4d185e38118',	'[\"*\"]',	NULL,	NULL,	'2022-10-14 16:51:00',	'2022-10-14 16:51:00'),
+(4,	'App\\Models\\User',	2,	'authToken',	'407482d2c2d390b1dd93710a6f4f7394141ca89bcbd4ec8146836414db847271',	'[\"*\"]',	NULL,	NULL,	'2022-10-17 19:08:07',	'2022-10-17 19:08:07');
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
@@ -179,6 +183,9 @@ CREATE TABLE `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('NUPRVG5hS4K2jJt5rsl5vX0WaJeEe0UUcpFr5FK9',	NULL,	'127.0.0.1',	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15',	'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVjF6dG9uenplR1dOdnAxdG81Wm9vR3Z3blp1UFFDNGx3d211eFd3cSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly9nb2xkbmF0aW9uLWJhY2tlbmQudGVzdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',	1665765886),
+('q8LXF2OeHCqwmcapQuuUcJTS7Sqc3G6xUriAgrrg',	NULL,	'127.0.0.1',	'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15',	'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTNUWHA5RWVSVWMzQkdkQUNMWjBnWm9DWjBya3NHYTB3Q2R6V3VBQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9nb2xkbmF0aW9uLWJhY2tlbmQudGVzdC9yZWdpc3RlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=',	1665794696);
 
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
@@ -227,7 +234,10 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `phone`, `roles`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
+(1,	'Harizah Syawal17',	'jennie.kim@blackpink.co',	'harizah',	'123123123',	'USER',	NULL,	'$2y$10$oS1tA2OGqMZmhND22KaGtuC0IViNC43.uINK2NrToYUb1GFr6dooq',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'2022-10-14 16:47:53',	'2022-10-17 22:35:50'),
+(2,	'Jennie Kim 2',	'jennie.kim2@blackpink.co',	NULL,	NULL,	'USER',	NULL,	'$2y$10$EhVi52ta0Y4C1VZ02RRGrOAgJSa1yGIwCZpMlAkcqpOXP.02ZrU9C',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'2022-10-17 19:08:07',	'2022-10-17 19:08:07');
 
--- 2022-10-14 15:22:26
+-- 2022-10-18 11:29:33
